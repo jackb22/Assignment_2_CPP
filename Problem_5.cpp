@@ -52,33 +52,70 @@
  * s: double - calculates the semi-perimeter of the triangle
  */
 
-
 /*
  * Test Plan:
  *
- * Normal case(Corectly caculates area, circumference, and bounding box of a circle, rectangle, and triangle):
+ * Normal case(Correctly calculates area, circumference, and bounding box of a circle, rectangle, and triangle):
+ *    Shape: Rectangle
+ *    Area: 12
+ *    Circumference: 14
+ *    Bounding box: Point (0, 3)
+ *    Point (4, 0)
+ *    Vertices: Point (0, 0)
+ *    Point (4, 0)
+ *    Point (4, 3)
+ *    Point (0, 3)
+ *
+ *    Shape: Square
+ *    Area: 25
+ *    Circumference: 20
+ *    Bounding box: Point (0, 5)
+ *    Point (5, 0)
+ *    Vertices: Point (0, 0)
+ *    Point (5, 0)
+ *    Point (5, 5)
+ *    Point (0, 5)
+ *
+ *    Shape: Circle
+ *    Area: 0
+ *    Circumference: 0
+ *    Bounding box: Point (2, 0)
+ *    Point (2, 0)
+ *    Center: Point (2, 0)
+ *    Radius: 0
+ *
+ *    Shape: Triangle
+ *    Area: 12
+ *    Circumference: 16
+ *    Bounding box: Point (0, 4)
+ *    Point (6, 0)
+ *    Point 1: Point (0, 0)
+ *    Point 2: Point (3, 4)
+ *    Point 3: Point (6, 0)
  *
  *
- * Bad case(Does not calculate area, circumference, and bounding box of a circle, rectangle, and triangle):
+ * Bad case(invalid points for a shape  ):
+ *  Error: Not a valid triangle
+ *  Shape: Shape
+ *  Area: 0
+ *  Circumference: 0
+ *  Bounding box: Point (0, 0)
+ *  Point (0, 0)
+ *  Point 1: Point (0, 0)
+ *  Point 2: Point (1, 1)
+ *  Point 3: Point (2, 2)
  *
- *
- * bad case(non-numeric input):
- *
- *
- * bad case(negative radius):
- *
- *
- * bad case(negative side length):
- *
- *
- * bad case(negative height):
- *
- * bad case(negative base):
- *
- * bad case(negative width):
- *
- * bad case(negative length):
- *
+ * Bad case(negative point):
+ *  Error: Not a valid rectangle
+ *  Shape: Shape
+ *  Area: 0
+ *  Circumference: 0
+ *  Bounding box: Point (0, 0)
+ *  Point (0, 0)
+ *  Vertices: Point (0, 0)
+ *  Point (0, 0)
+ *  Point (0, 0)
+ *  Point (0, 0)
  *
  */
 
