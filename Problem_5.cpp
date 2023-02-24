@@ -219,6 +219,10 @@ public:
             calculate_area();
             calculate_circumference();
             calculate_bounding_box();
+
+            if (is_square()) {
+                name = "Square";
+            }
         }
         else {
             std::cout << "Error: Not a valid rectangle" << std::endl;
@@ -230,7 +234,7 @@ public:
     }
 
     double calculate_circumference() override {
-      return   circumference = 2 * (p1.distance(p2) + p2.distance(p3));
+        return   circumference = 2 * (p1.distance(p2) + p2.distance(p3));
     }
 
     void calculate_bounding_box() override {
@@ -239,6 +243,20 @@ public:
         lower_right = Point(std::max({p1.get_x(), p2.get_x(), p3.get_x(), p4.get_x()}),
                             std::min({p1.get_y(), p2.get_y(), p3.get_y(), p4.get_y()}));
     }
+
+    bool is_square() const {
+        double side1 = p1.distance(p2);
+        double side2 = p2.distance(p3);
+        double side3 = p3.distance(p4);
+        double side4 = p4.distance(p1);
+
+        if (side1 == side2 && side2 == side3 && side3 == side4){
+            return true;}
+        else{
+            return false;}
+    }
+
+
 
     void display() override {
         Shape::display();
@@ -249,7 +267,6 @@ public:
         p4.show();
     }
 };
-
 class Triangle : public Shape {
 private:
     Point p1, p2, p3;
@@ -304,3 +321,10 @@ public:
         p3.show();
     }
 };
+
+
+int main() {
+
+}
+
+
