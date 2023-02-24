@@ -101,13 +101,13 @@ public:
         return y;
     }
 
-    // Add a point to this point
+    // Add method
     void add(const Point& p) {
         x += p.x;
         y += p.y;
     }
 
-    // Subtract a point from this point
+    // Subtract method
     void subtract(const Point& p) {
         x -= p.x;
         y -= p.y;
@@ -183,7 +183,7 @@ public:
     double calculate_area() override {
         return area = M_PI * radius * radius;
     }
-    
+
     // Calculate the circumference of the circle
     double calculate_circumference() override {
         return circumference = 2.0 * M_PI * radius;
@@ -201,6 +201,7 @@ public:
         std::cout << "Radius: " << radius << std::endl;
     }
 };
+
 class Rectangle : public Shape {
 private:
     Point p1;
@@ -210,12 +211,19 @@ private:
 public:
     // Default constructor
     Rectangle() {}
-    
+
     // Constructor
     Rectangle(Point p1, Point p2, Point p3, Point p4) {
+        //calculate the distance between the points
+        double d1 = p1.distance(p2);
+        double d2 = p2.distance(p3);
+        double d3 = p3.distance(p4);
+        double d4 = p4.distance(p1);
+        double d5 = p1.distance(p3);
+        double d6 = p2.distance(p4);
         // Check if the points form a rectangle
-        if (p1.get_x() == p2.get_x() && p1.get_y() == p4.get_y() &&
-            p2.get_y() == p3.get_y() && p3.get_x() == p4.get_x()) {
+        if ((d1 == d3 && d2 == d4 && d5 == d6) || (d1 == d4 && d2 == d3 && d5 == d6)) {
+            // Set the points
             this->p1 = p1;
             this->p2 = p2;
             this->p3 = p3;
@@ -233,7 +241,8 @@ public:
             std::cout << "Error: Not a valid rectangle" << std::endl;
         }
     }
-    //calculate area 
+
+    //calculate area
     double calculate_area() override {
         return area = (p1.distance(p2) * p2.distance(p3));
     }
@@ -242,7 +251,7 @@ public:
     double calculate_circumference() override {
         return   circumference = 2 * (p1.distance(p2) + p2.distance(p3));
     }
-    
+
     //calculate bounding box
     void calculate_bounding_box() override {
         upper_left = Point(std::min({p1.get_x(), p2.get_x(), p3.get_x(), p4.get_x()}),
@@ -294,7 +303,7 @@ public:
             std::cout << "Error: Not a valid triangle" << std::endl;
         }
     }
-    //calculating area of triangle 
+    //calculating area of triangle
     double calculate_area() override {
         double a = p1.distance(p2);
         double b = p2.distance(p3);
@@ -313,7 +322,7 @@ public:
         lower_right = Point(std::max({p1.get_x(), p2.get_x(), p3.get_x()}),
                             std::min({p1.get_y(), p2.get_y(), p3.get_y()}));
     }
-   
+
     //check if the points form a triangle
     bool is_valid() const {
         double a = p1.distance(p2);
@@ -321,7 +330,7 @@ public:
         double c = p3.distance(p1);
         return a + b > c && b + c > a && c + a > b;
     }
-    
+
     // Display information about the triangle
     void display() override {
         Shape::display();
@@ -337,6 +346,29 @@ public:
 
 int main() {
 
+    // Create a rectangle with width 4 and height 3
+    Rectangle r1(Point(0,0), Point(4,0), Point(4,3), Point(0,3));
+    r1.display();
+    std::cout << std::endl;
+
+    // Create a square with side length 5
+    Rectangle s1(Point(0,0), Point(5,0), Point(5,5), Point(0,5));
+    s1.display();
+    std::cout << std::endl;
+    // Create a circle with radius 2
+    Circle c1(2);
+    c1.display();
+    std::cout << std::endl;
+
+    // Create a triangle with vertices (0,0), (3,4), and (6,0)
+    Triangle t1(Point(0, 0), Point(3, 4), Point(6, 0));
+    t1.display();
+    std::cout << std::endl;
+
+    // Create an invalid triangle with vertices (0,0), (1,1), and (2,2)
+    Triangle t2(Point(0, 0), Point(1, 1), Point(2, 2));
+    t2.display();
+    std::cout << std::endl;
+
+    return 0;
 }
-
-
