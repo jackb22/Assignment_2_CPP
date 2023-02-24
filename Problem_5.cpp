@@ -167,7 +167,9 @@ private:
     double radius;
 
 public:
+    // Default constructor
     Circle(Point center_val = Point(), double radius_val = 0.0) : center(center_val), radius(radius_val) {
+        // Check if radius is negative
         if (radius < 0.0) {
             std::cout << "Warning: Invalid radius for Circle." << std::endl;
             radius = 0.0;
@@ -177,20 +179,21 @@ public:
         calculate_circumference();
         calculate_bounding_box();
     }
-
+    // Calculate the area of the circle
     double calculate_area() override {
         return area = M_PI * radius * radius;
     }
-
+    
+    // Calculate the circumference of the circle
     double calculate_circumference() override {
         return circumference = 2.0 * M_PI * radius;
     }
-
+    // Calculate the bounding box of the circle
     void calculate_bounding_box() override {
         upper_left = Point(center.get_x() - radius, center.get_y() + radius);
         lower_right = Point(center.get_x() + radius, center.get_y() - radius);
     }
-
+    // Display information about the circle
     void display() override {
         Shape::display();
         std::cout << "Center: ";
@@ -198,7 +201,6 @@ public:
         std::cout << "Radius: " << radius << std::endl;
     }
 };
-
 class Rectangle : public Shape {
 private:
     Point p1;
