@@ -27,18 +27,29 @@
  * circumference: double - holds the circumference of the shape
  * upper_left: Point - holds the upper left point of the bounding box
  * lower_right: Point - holds the lower right point of the bounding box
- * center: Point - holds the center point of the circle
+ * center: Point - holds the center of the circle
  * radius: double - holds the radius of the circle
  * p1: Point - holds the first point of the rectangle
  * p2: Point - holds the second point of the rectangle
  * p3: Point - holds the third point of the rectangle
  * p4: Point - holds the fourth point of the rectangle
+ * d1: double - holds the distance between p1 and p2
+ * d2: double - holds the distance between p2 and p3
+ * d3: double - holds the distance between p3 and p4
+ * d4: double - holds the distance between p4 and p1
+ * d5: double - holds the distance between p1 and p3
+ * d6: double - holds the distance between p2 and p4
+ * side1: double - holds the length of the first side of the triangle
+ * side2: double - holds the length of the second side of the triangle
+ * side3: double - holds the length of the third side of the triangle
+ * side4: double - holds the length of the fourth side of the triangle
  * p1: Point - holds the first point of the triangle
  * p2: Point - holds the second point of the triangle
  * p3: Point - holds the third point of the triangle
- *
- *
- *
+ * a: double - holds the length of the first side of the triangle
+ * b: double - holds the length of the second side of the triangle
+ * c: double - holds the length of the third side of the triangle
+ * s: double - calculates the semi-perimeter of the triangle
  */
 
 
