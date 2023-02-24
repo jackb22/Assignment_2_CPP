@@ -206,9 +206,12 @@ private:
     Point p3;
     Point p4;
 public:
+    // Default constructor
     Rectangle() {}
-
+    
+    // Constructor
     Rectangle(Point p1, Point p2, Point p3, Point p4) {
+        // Check if the points form a rectangle
         if (p1.get_x() == p2.get_x() && p1.get_y() == p4.get_y() &&
             p2.get_y() == p3.get_y() && p3.get_x() == p4.get_x()) {
             this->p1 = p1;
@@ -219,7 +222,7 @@ public:
             calculate_area();
             calculate_circumference();
             calculate_bounding_box();
-
+            // Check if the rectangle is a square
             if (is_square()) {
                 name = "Square";
             }
@@ -228,15 +231,17 @@ public:
             std::cout << "Error: Not a valid rectangle" << std::endl;
         }
     }
-
+    //calculate area 
     double calculate_area() override {
         return area = (p1.distance(p2) * p2.distance(p3));
     }
 
+    //calculate circumference
     double calculate_circumference() override {
         return   circumference = 2 * (p1.distance(p2) + p2.distance(p3));
     }
-
+    
+    //calculate bounding box
     void calculate_bounding_box() override {
         upper_left = Point(std::min({p1.get_x(), p2.get_x(), p3.get_x(), p4.get_x()}),
                            std::max({p1.get_y(), p2.get_y(), p3.get_y(), p4.get_y()}));
@@ -244,6 +249,7 @@ public:
                             std::min({p1.get_y(), p2.get_y(), p3.get_y(), p4.get_y()}));
     }
 
+    //check if the rectangle is a square
     bool is_square() const {
         double side1 = p1.distance(p2);
         double side2 = p2.distance(p3);
@@ -256,8 +262,7 @@ public:
             return false;}
     }
 
-
-
+    // Display information about the rectangle or square
     void display() override {
         Shape::display();
         std::cout << "Vertices: ";
@@ -267,13 +272,16 @@ public:
         p4.show();
     }
 };
+
 class Triangle : public Shape {
 private:
     Point p1, p2, p3;
 
 public:
+    // Default constructor
     Triangle(const Point& p1_val = Point(), const Point& p2_val = Point(), const Point& p3_val = Point())
             : p1(p1_val), p2(p2_val), p3(p3_val) {
+        // Check if the points form a triangle
         if (is_valid()) {
             name = "Triangle";
             calculate_area();
@@ -284,7 +292,7 @@ public:
             std::cout << "Error: Not a valid triangle" << std::endl;
         }
     }
-
+    //calculating area of triangle 
     double calculate_area() override {
         double a = p1.distance(p2);
         double b = p2.distance(p3);
@@ -292,25 +300,27 @@ public:
         double s = (a + b + c) / 2.0;
         return area = std::sqrt(s * (s - a) * (s - b) * (s - c));
     }
-
+    //calculating circumference of triangle
     double calculate_circumference() override {
         return circumference = p1.distance(p2) + p2.distance(p3) + p3.distance(p1);
     }
-
+    //calculating bounding box of triangle
     void calculate_bounding_box() override {
         upper_left = Point(std::min({p1.get_x(), p2.get_x(), p3.get_x()}),
                            std::max({p1.get_y(), p2.get_y(), p3.get_y()}));
         lower_right = Point(std::max({p1.get_x(), p2.get_x(), p3.get_x()}),
                             std::min({p1.get_y(), p2.get_y(), p3.get_y()}));
     }
-
+   
+    //check if the points form a triangle
     bool is_valid() const {
         double a = p1.distance(p2);
         double b = p2.distance(p3);
         double c = p3.distance(p1);
         return a + b > c && b + c > a && c + a > b;
     }
-
+    
+    // Display information about the triangle
     void display() override {
         Shape::display();
         std::cout << "Point 1: ";
