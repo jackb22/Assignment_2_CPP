@@ -420,3 +420,59 @@ int main() {
 
     return 0;
 }
+
+
+
+/*  Examples of how to implement: 
+// Add two triangles
+    Triangle add(const Triangle& t) const {
+        return Triangle(p1.add(t.p1), p2.add(t.p2), p3.add(t.p3));
+    }
+
+    // Add a constant value to all points of triangle
+    Triangle add(double val) const {
+        return Triangle(p1.add(val), p2.add(val), p3.add(val));
+    }
+
+    // Subtract two triangles
+    Triangle subtract(const Triangle& t) const {
+        return Triangle(p1.subtract(t.p1), p2.subtract(t.p2), p3.subtract(t.p3));
+    }
+
+    // Subtract a constant value from all points of triangle
+    Triangle subtract(double val) const {
+        return Triangle(p1.subtract(val), p2.subtract(val), p3.subtract(val));
+        
+        
+   // Add two points
+    Point add(const Point& p) const {
+        return Point(x + p.x, y + p.y);
+    }
+
+    // Add a constant value to both x and y
+    Point add(double val) const {
+        return Point(x + val, y + val);
+    }
+
+    // Subtract two points
+    Point subtract(const Point& p) const {
+        return Point(x - p.x, y - p.y);
+    }
+
+    // Subtract a constant value from both x and y
+    Point subtract(double val) const {
+        return Point(x - val, y - val);
+    }
+
+
+/ Add method for Rectangle
+    void add(const Point& p) override {
+        position = position + p;
+        calculate_bounding_box();
+    }
+
+    // Subtract method for Rectangle
+    void subtract(const Point& p) override {
+        position = position - p;
+        calculate_bounding_box();
+    }
