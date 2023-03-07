@@ -52,6 +52,7 @@
  * s: double - calculates the semi-perimeter of the triangle
  */
 
+
 /*
  * Test Plan:
  *
@@ -94,6 +95,7 @@
  *    Point 3: Point (6, 0)
  *
  *
+ *
  * Bad case(invalid points for a shape  ):
  *  Error: Not a valid triangle
  *  Shape: Shape
@@ -105,7 +107,7 @@
  *  Point 2: Point (1, 1)
  *  Point 3: Point (2, 2)
  *
- * Bad case(negative point):
+ * bad case(negative point ):
  *  Error: Not a valid rectangle
  *  Shape: Shape
  *  Area: 0
@@ -116,6 +118,8 @@
  *  Point (0, 0)
  *  Point (0, 0)
  *  Point (0, 0)
+ *
+ *
  *
  */
 
@@ -128,7 +132,7 @@ private:
     double x, y;
 
 public:
-    // Default constructor
+    // Copy Constructor
     Point(double x = 0.0, double y = 0.0) : x(x), y(y) {}
 
     // Copy constructor
@@ -138,6 +142,7 @@ public:
     void show() const {
         std::cout << "Point (" << x << ", " << y << ")" << std::endl;
     }
+
 
     // Getter for x coordinate
     double get_x() const {
@@ -330,6 +335,10 @@ public:
         p3.show();
         p4.show();
     }
+
+    void remove_point(Point p1, Point p2){
+        Point::add(p1, p2);
+    }
 };
 
 class Triangle : public Shape {
@@ -420,6 +429,86 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//class Triangle : public Shape {
+//private:
+//    Point vertices[3];
+//    Rectangle bounding_box;
+//
+//public:
+//    // Default constructor
+//    Triangle() : vertices{Point(), Point(), Point()}, bounding_box() {}
+//
+//    // Constructor with arguments
+//    Triangle(Point v1, Point v2, Point v3) : vertices{v1, v2, v3}, bounding_box() {
+//        // Check if the points form a valid triangle
+//        double a = vertices[0].distance(vertices[1]);
+//        double b = vertices[1].distance(vertices[2]);
+//        double c = vertices[2].distance(vertices[0]);
+//        if (a + b <= c || b + c <= a || c + a <= b) {
+//            std::cerr << "Invalid triangle: Points do not form a valid triangle." << std::endl;
+//            exit(EXIT_FAILURE);
+//        }
+//        name = "Triangle";
+//        calculate_area();
+//        calculate_circumference();
+//        calculate_bounding_box();
+//    }
+//
+//    // Override Shape's area() function
+//    double calculate_area() override {
+//        double a = vertices[0].distance(vertices[1]);
+//        double b = vertices[1].distance(vertices[2]);
+//        double c = vertices[2].distance(vertices[0]);
+//        double s = (a + b + c) / 2.0;
+//        area = sqrt(s * (s - a) * (s - b) * (s - c));
+//        return area;
+//    }
+//
+//    // Override Shape's circumference() function
+//    double calculate_circumference() override {
+//        circumference = vertices[0].distance(vertices[1]) + vertices[1].distance(vertices[2]) + vertices[2].distance(vertices[0]);
+//        return circumference;
+//    }
+//
+//    // Override Shape's bounding_box() function
+//    Rectangle calculate_bounding_box() override {
+//        double x_min = std::min({vertices[0].get_x(), vertices[1].get_x(), vertices[2].get_x()});
+//        double x_max = std::max({vertices[0].get_x(), vertices[1].get_x(), vertices[2].get_x()});
+//        double y_min = std::min({vertices[0].get_y(), vertices[1].get_y(), vertices[2].get_y()});
+//        double y_max = std::max({vertices[0].get_y(), vertices[1].get_y(), vertices[2].get_y()});
+//        bounding_box = Rectangle(Point(x_min, y_min), Point(x_max, y_max));
+//        return bounding_box;
+//    }
+//
+//    // Override Shape's display() function
+//    void display() override {
+//        Shape::display();
+//        std::cout << "Vertices: " << std::endl;
+//        for (int i = 0; i < 3; i++) {
+//            vertices[i].show();
+//        }
+//        std::cout << "Bounding box: ";
+//        bounding_box.show();
+//    }
+//};
+
 
 
 
