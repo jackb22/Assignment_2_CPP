@@ -50,6 +50,8 @@
  * b: double - holds the length of the second side of the triangle
  * c: double - holds the length of the third side of the triangle
  * s: double - calculates the semi-perimeter of the triangle
+ * Sum: Point - holds the sum of the x and y coordinates of the points
+ * Difference: Point - holds the difference of the x and y coordinates of the points
  */
 
 
@@ -66,62 +68,134 @@
  *    Point (4, 0)
  *    Point (4, 3)
  *    Point (0, 3)
+ *    Sum: (4, 0)
+ *    Difference: (-4, 0)
  *
- *    Shape: Square
- *    Area: 25
- *    Circumference: 20
- *    Bounding box: Point (0, 5)
- *    Point (5, 0)
- *    Vertices: Point (0, 0)
- *    Point (5, 0)
- *    Point (5, 5)
- *    Point (0, 5)
+ *   Shape: Square
+ *   Area: 25
+ *   Circumference: 20
+ *   Bounding box: Point (0, 5)
+ *   Point (5, 0)
+ *   Vertices: Point (0, 0)
+ *   Point (5, 0)
+ *   Point (5, 5)
+ *   Point (0, 5)
+ *   Sum: (5, 0)
+ *   Difference: (-5, 0)
  *
- *    Shape: Circle
- *    Area: 0
- *    Circumference: 0
- *    Bounding box: Point (2, 0)
- *    Point (2, 0)
- *    Center: Point (2, 0)
- *    Radius: 0
+ *   Shape: Circle
+ *   Area: 0
+ *   Circumference: 0
+ *   Bounding box: Point (2, 0)
+ *   Point (2, 0)
+ *   Center: Point (2, 0)
+ *   Radius: 0
+ *   Sum: (4, 0)
+ *   Difference: (0, 0)
  *
- *    Shape: Triangle
+ *   Shape: Triangle
+ *   Area: 12
+ *   Circumference: 16
+ *   Bounding box: Point (0, 4)
+ *   Point (6, 0)
+ *   Point 1: Point (0, 0)
+ *   Point 2: Point (3, 4)
+ *   Point 3: Point (6, 0)
+ *   Sum: (3, 4)
+ *   Difference: (-3, -4)
+ *
+ * Bad Case (invalid Triangle)
+ *    Shape: Rectangle
  *    Area: 12
- *    Circumference: 16
- *    Bounding box: Point (0, 4)
- *    Point (6, 0)
- *    Point 1: Point (0, 0)
- *    Point 2: Point (3, 4)
- *    Point 3: Point (6, 0)
+ *    Circumference: 14
+ *    Bounding box: Point (0, 3)
+ *    Point (4, 0)
+ *    Vertices: Point (0, 0)
+ *    Point (4, 0)
+ *    Point (4, 3)
+ *    Point (0, 3)
+ *    Sum: (4, 0)
+ *    Difference: (-4, 0)
  *
+ *   Shape: Square
+ *   Area: 25
+ *   Circumference: 20
+ *   Bounding box: Point (0, 5)
+ *   Point (5, 0)
+ *   Vertices: Point (0, 0)
+ *   Point (5, 0)
+ *   Point (5, 5)
+ *   Point (0, 5)
+ *   Sum: (5, 0)
+ *   Difference: (-5, 0)
  *
+ *   Shape: Circle
+ *   Area: 0
+ *   Circumference: 0
+ *   Bounding box: Point (2, 0)
+ *   Point (2, 0)
+ *   Center: Point (2, 0)
+ *   Radius: 0
+ *   Sum: (4, 0)
+ *   Difference: (0, 0)
  *
- * Bad case(invalid points for a shape  ):
- *  Error: Not a valid triangle
- *  Shape: Shape
- *  Area: 0
- *  Circumference: 0
- *  Bounding box: Point (0, 0)
- *  Point (0, 0)
- *  Point 1: Point (0, 0)
- *  Point 2: Point (1, 1)
- *  Point 3: Point (2, 2)
+ *   Shape: Triangle
+ *   Area: 12
+ *   Circumference: 16
+ *   Bounding box: Point (0, 4)
+ *   Point (6, 0)
+ *   Point 1: Point (0, 0)
+ *   Point 2: Point (3, 4)
+ *   Point 3: Point (6, 0)
+ *   Sum: (3, 4)
+ *   Difference: (-3, -4)
  *
- * bad case(negative point ):
- *  Error: Not a valid rectangle
- *  Shape: Shape
- *  Area: 0
- *  Circumference: 0
- *  Bounding box: Point (0, 0)
- *  Point (0, 0)
- *  Vertices: Point (0, 0)
- *  Point (0, 0)
- *  Point (0, 0)
- *  Point (0, 0)
+ *   Shape: Invalid Triangle
+ *    Area: 0
+ *   Circumference: 0
+ *   Bounding box: Point (0, 0)
+ *   Point (0, 0)
+ *   Point 1: Point (0, 0)
+ *   Point 2: Point (1, 1)
+ *   Point 3: Point (2, 2)
+ *   Sum: (1, 1)
+ *   Difference: (-1, -1)
  *
+ *   Error: Not a valid triangle
  *
+ * Bad Case(invalid Circle)
+ *   Shape: Invalid Circle
+ *   Area: 0
+ *   Circumference: 0
+ *   Bounding box: Point (0, 0)
+ *   Point (0, 0)
+ *   Center: Point (2, 0)
+ *   Radius: -6
+ *   Sum: (0, 0)
+ *   Difference: (0, 0)
  *
- */
+ *   Warning: Invalid radius for Circle.
+ *
+ *  Note: the output for the rest of the code remains the same as the normal case
+ *
+ *  Base Case (invalid Rectangle)
+ *  Shape: Invalid Rectangle
+ *   Area: 0
+ *   Circumference: 0
+ *   Bounding box: Point (0, 0)
+ *   Point (0, 0)
+ *   Vertices: Point (0, 0)
+ *   Point (0, 0)
+ *   Point (0, 0)
+ *   Point (0, 0)
+ *   Sum: (0, 0)
+ *   Difference: (0, 0)
+ *
+ *   Error: Not a valid rectangle
+ *
+ * Note: the output for the rest of the code remains the same as the normal case
+ *
+*/
 
 #include <iostream>
 #include <cmath>
@@ -155,16 +229,33 @@ public:
     }
 
     // Add method
-    void add(const Point& p) {
-        x += p.x;
-        y += p.y;
+    Point add(Point p) {
+        Point result(this->x + p.x, this->y + p.y);
+        return result;
     }
 
     // Subtract method
-    void subtract(const Point& p) {
-        x -= p.x;
-        y -= p.y;
+    Point subtract(Point p) {
+        Point result(this->x - p.x, this->y - p.y);
+        return result;
     }
+
+    Point operate(Point p, std::string operation) {
+        if (operation == "add") {
+            Point result = this->add(p);
+            std::cout << "Sum: (" << result.x << ", " << result.y << ")" << std::endl;
+            return result;
+        } else if (operation == "subtract") {
+            Point result = this->subtract(p);
+            std::cout << "Difference: (" << result.x << ", " << result.y << ")" << std::endl;
+            return result;
+        } else {
+            // Handle invalid operation
+            std::cerr << "Invalid operation: " << operation << std::endl;
+            return Point();
+        }
+    }
+
 
     // Calculate the distance between this point and another point
     double distance(const Point& p) const {
@@ -180,6 +271,9 @@ protected:
     double circumference;
     Point upper_left;
     Point lower_right;
+    Point sum;
+    Point difference;
+
 
 public:
     // Default constructor
@@ -210,6 +304,7 @@ public:
         std::cout << "Bounding box: ";
         upper_left.show();
         lower_right.show();
+
     }
 };
 
@@ -224,14 +319,16 @@ public:
     Circle(Point center_val = Point(), double radius_val = 0.0) : center(center_val), radius(radius_val) {
         // Check if radius is negative
         if (radius < 0.0) {
-            std::cout << "Warning: Invalid radius for Circle." << std::endl;
-            radius = 0.0;
-        }
+            std::cerr << "Warning: Invalid radius for Circle." << std::endl;
+            name = "Invalid Circle";
+        }else{
         name = "Circle";
         calculate_area();
         calculate_circumference();
         calculate_bounding_box();
+       }
     }
+
     // Calculate the area of the circle
     double calculate_area() override {
         return area = M_PI * radius * radius;
@@ -252,6 +349,8 @@ public:
         std::cout << "Center: ";
         center.show();
         std::cout << "Radius: " << radius << std::endl;
+        sum = upper_left.operate(lower_right, "add");
+        difference = upper_left.operate(lower_right, "subtract");
     }
 };
 
@@ -291,7 +390,8 @@ public:
             }
         }
         else {
-            std::cout << "Error: Not a valid rectangle" << std::endl;
+            std::cerr << "Error: Not a valid rectangle" << std::endl;
+            name = "Invalid Rectangle";
         }
     }
 
@@ -334,11 +434,11 @@ public:
         p2.show();
         p3.show();
         p4.show();
+        sum = p1.operate(p2, "add");
+        difference = p1.operate(p2, "subtract");
     }
 
-    void remove_point(Point p1, Point p2){
-        Point::add(p1, p2);
-    }
+
 };
 
 class Triangle : public Shape {
@@ -357,7 +457,8 @@ public:
             calculate_bounding_box();
         }
         else {
-            std::cout << "Error: Not a valid triangle" << std::endl;
+            std::cerr << "Error: Not a valid triangle" << std::endl;
+            name = "Invalid Triangle";
         }
     }
     //calculating area of triangle
@@ -397,6 +498,8 @@ public:
         p2.show();
         std::cout << "Point 3: ";
         p3.show();
+        sum = p1.operate(p2, "add");
+        difference = p1.operate(p2, "subtract");
     }
 };
 
@@ -413,7 +516,7 @@ int main() {
     s1.display();
     std::cout << std::endl;
     // Create a circle with radius 2
-    Circle c1(2);
+    Circle c1(2, 2 );
     c1.display();
     std::cout << std::endl;
 
@@ -422,146 +525,20 @@ int main() {
     t1.display();
     std::cout << std::endl;
 
-    // Create an invalid triangle with vertices (0,0), (1,1), and (2,2)
+   // Create an invalid triangle with vertices (0,0), (1,1), and (2,2)
     Triangle t2(Point(0, 0), Point(1, 1), Point(2, 2));
     t2.display();
+    std::cout << std::endl;
+ 
+   //invalid circle
+   Circle c2(2, -6);
+   c2.display();
+   std::cout << std::endl;
+
+    //invalid rectangle
+    Rectangle r2(Point(0,0), Point(0,1), Point(1,1), Point(2,2));
+    r2.display();
     std::cout << std::endl;
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//class Triangle : public Shape {
-//private:
-//    Point vertices[3];
-//    Rectangle bounding_box;
-//
-//public:
-//    // Default constructor
-//    Triangle() : vertices{Point(), Point(), Point()}, bounding_box() {}
-//
-//    // Constructor with arguments
-//    Triangle(Point v1, Point v2, Point v3) : vertices{v1, v2, v3}, bounding_box() {
-//        // Check if the points form a valid triangle
-//        double a = vertices[0].distance(vertices[1]);
-//        double b = vertices[1].distance(vertices[2]);
-//        double c = vertices[2].distance(vertices[0]);
-//        if (a + b <= c || b + c <= a || c + a <= b) {
-//            std::cerr << "Invalid triangle: Points do not form a valid triangle." << std::endl;
-//            exit(EXIT_FAILURE);
-//        }
-//        name = "Triangle";
-//        calculate_area();
-//        calculate_circumference();
-//        calculate_bounding_box();
-//    }
-//
-//    // Override Shape's area() function
-//    double calculate_area() override {
-//        double a = vertices[0].distance(vertices[1]);
-//        double b = vertices[1].distance(vertices[2]);
-//        double c = vertices[2].distance(vertices[0]);
-//        double s = (a + b + c) / 2.0;
-//        area = sqrt(s * (s - a) * (s - b) * (s - c));
-//        return area;
-//    }
-//
-//    // Override Shape's circumference() function
-//    double calculate_circumference() override {
-//        circumference = vertices[0].distance(vertices[1]) + vertices[1].distance(vertices[2]) + vertices[2].distance(vertices[0]);
-//        return circumference;
-//    }
-//
-//    // Override Shape's bounding_box() function
-//    Rectangle calculate_bounding_box() override {
-//        double x_min = std::min({vertices[0].get_x(), vertices[1].get_x(), vertices[2].get_x()});
-//        double x_max = std::max({vertices[0].get_x(), vertices[1].get_x(), vertices[2].get_x()});
-//        double y_min = std::min({vertices[0].get_y(), vertices[1].get_y(), vertices[2].get_y()});
-//        double y_max = std::max({vertices[0].get_y(), vertices[1].get_y(), vertices[2].get_y()});
-//        bounding_box = Rectangle(Point(x_min, y_min), Point(x_max, y_max));
-//        return bounding_box;
-//    }
-//
-//    // Override Shape's display() function
-//    void display() override {
-//        Shape::display();
-//        std::cout << "Vertices: " << std::endl;
-//        for (int i = 0; i < 3; i++) {
-//            vertices[i].show();
-//        }
-//        std::cout << "Bounding box: ";
-//        bounding_box.show();
-//    }
-//};
-
-
-
-
-/*  Examples of how to implement: 
-// Add two triangles
-    Triangle add(const Triangle& t) const {
-        return Triangle(p1.add(t.p1), p2.add(t.p2), p3.add(t.p3));
-    }
-
-    // Add a constant value to all points of triangle
-    Triangle add(double val) const {
-        return Triangle(p1.add(val), p2.add(val), p3.add(val));
-    }
-
-    // Subtract two triangles
-    Triangle subtract(const Triangle& t) const {
-        return Triangle(p1.subtract(t.p1), p2.subtract(t.p2), p3.subtract(t.p3));
-    }
-
-    // Subtract a constant value from all points of triangle
-    Triangle subtract(double val) const {
-        return Triangle(p1.subtract(val), p2.subtract(val), p3.subtract(val));
-        
-        
-   // Add two points
-    Point add(const Point& p) const {
-        return Point(x + p.x, y + p.y);
-    }
-
-    // Add a constant value to both x and y
-    Point add(double val) const {
-        return Point(x + val, y + val);
-    }
-
-    // Subtract two points
-    Point subtract(const Point& p) const {
-        return Point(x - p.x, y - p.y);
-    }
-
-    // Subtract a constant value from both x and y
-    Point subtract(double val) const {
-        return Point(x - val, y - val);
-    }
-
-
-/ Add method for Rectangle
-    void add(const Point& p) override {
-        position = position + p;
-        calculate_bounding_box();
-    }
-
-    // Subtract method for Rectangle
-    void subtract(const Point& p) override {
-        position = position - p;
-        calculate_bounding_box();
-    }
