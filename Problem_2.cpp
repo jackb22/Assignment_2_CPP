@@ -64,12 +64,12 @@ private:
 public:
     //Constructor
     Book(std::string title, std::string isbn, std::string author, int edition, std::string publisher, int year) {
-        this->title = std::move(title);
-        this->isbn = std::move(isbn);
-        this->author = std::move(author);
-        this->edition = edition;
-        this->publisher = std::move(publisher);
-        this->year = year;
+        setTitle(title);
+        setISBN(isbn);
+        setAuthor(author);
+        setEdition(edition);
+        setPublisher(publisher);
+        setYear(year);
     }
 
     // setters
@@ -85,7 +85,7 @@ public:
         if (isbn.length() == 13 && isbn.find_first_not_of("0123456789") == std::string::npos) {
             this->isbn = isbn;
         } else {
-            std::cout << "Invalid ISBN" << std::endl;
+            std::cerr << "Invalid ISBN" << std::endl;
         }
     }
 
